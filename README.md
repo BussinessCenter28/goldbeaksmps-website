@@ -101,6 +101,33 @@ public/                 # CNAME, favicon
 .github/workflows/      # GitHub Pages deploy
 ```
 
+## 🔐 Admin panel (`/admin`)
+
+The site is static, so the admin panel edits content by **committing to this repo
+via the GitHub API** — every save is a commit that triggers the auto-deploy, so
+changes go live in ~1–2 minutes. It edits:
+
+- **Staff** → `src/data/staff.json`
+- **Rules** → `src/data/rules.json`
+- **News** → Markdown files in `src/content/news/`
+
+### One-time setup
+
+1. Go to **https://your-domain/admin** (or `http://localhost:4321/admin` locally).
+2. Create a **fine-grained personal access token**:
+   GitHub → Settings → Developer settings → *Fine-grained tokens* → **Generate new token**.
+   - **Repository access:** Only select repositories → this repo.
+   - **Permissions:** *Contents* → **Read and write**.
+3. In `/admin`, paste the token, enter your **owner** (GitHub username), **repo**
+   name, and **branch** (`main`), then click **Connect**.
+4. Edit Staff / Rules / News and hit **Save**. Done.
+
+> **Security:** the token is stored only in your browser's `localStorage` and is sent
+> straight to `api.github.com`. Never share it or commit it. Use a fine-grained token
+> scoped to just this repo so it can't touch anything else. Sign out to clear it.
+
+Tip: set `REPO.owner` in [`src/config.ts`](src/config.ts) to pre-fill the owner field.
+
 ---
 
 Not affiliated with Mojang or Microsoft.

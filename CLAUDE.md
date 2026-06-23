@@ -69,6 +69,19 @@ public/
 - Keep it dependency-light and statically buildable (no SSR adapter) so GitHub
   Pages can host it.
 
+## Admin panel (`/admin`)
+
+A client-side editor (no backend) that commits content changes to this repo via the
+GitHub REST API using a user-supplied fine-grained token (stored in `localStorage`).
+
+- Runtime logic: `src/scripts/admin.ts` (`initAdmin()`), mounted by `src/pages/admin/index.astro`.
+- Edits `src/data/staff.json`, `src/data/rules.json`, and Markdown in `src/content/news/`.
+- That's why staff/rules are JSON (structured, machine-editable) while `staff.ts`/
+  `rules.ts` just import + type them. Keep the JSON shape stable or update both the
+  TS types and the admin editors.
+- Repo target comes from `REPO` in `src/config.ts` (or is typed into the admin UI).
+- The page is `noindex` and intentionally not linked from the public nav.
+
 ## Commands
 
 ```powershell
