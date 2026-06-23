@@ -15,12 +15,14 @@ const { Content } = await render(post);
 
 const fmt = (d: Date) =>
   d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <Base title={`${post.data.title} — GoldBeak SMPS`} description={post.data.summary}>
   <article class="section page-section">
     <div class="container post">
-      <a class="back-link" href="/news/">← All news</a>
+      <a class="back-link" href={`${base}/news/`}>← All news</a>
       {post.data.tag && <span class="news-tag">{post.data.tag}</span>}
       <h1 class="post-title">{post.data.title}</h1>
       <p class="post-meta">{fmt(post.data.date)} · {post.data.author}</p>

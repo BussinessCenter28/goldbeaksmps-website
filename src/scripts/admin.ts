@@ -238,9 +238,11 @@ async function saveStaff() {
   setMsg('#staff-msg', 'Saving…');
   try {
     const json = JSON.stringify(collectStaff(), null, 2) + '\n';
-    await putFile(STAFF_PATH, json, staffSha, 'admin: update staff');
+    const res = await putFile(STAFF_PATH, json, staffSha, 'admin: update staff');
+    // Use the SHA returned by the write — re-reading immediately can return a
+    // stale SHA (the API is eventually-consistent) and cause a 409 next save.
+    staffSha = res?.content?.sha ?? staffSha;
     setMsg('#staff-msg', '✓ Saved! The site will rebuild in ~1–2 min.', 'ok');
-    await loadStaff();
   } catch (e: any) {
     setMsg('#staff-msg', e.message, 'err');
   }
@@ -292,9 +294,9 @@ async function saveRules() {
   setMsg('#rules-msg', 'Saving…');
   try {
     const json = JSON.stringify(collectRules(), null, 2) + '\n';
-    await putFile(RULES_PATH, json, rulesSha, 'admin: update rules');
+    const res = await putFile(RULES_PATH, json, rulesSha, 'admin: update rules');
+    rulesSha = res?.content?.sha ?? rulesSha;
     setMsg('#rules-msg', '✓ Saved! The site will rebuild in ~1–2 min.', 'ok');
-    await loadRules();
   } catch (e: any) {
     setMsg('#rules-msg', e.message, 'err');
   }
@@ -424,9 +426,12 @@ async function savePost() {
   try {
     const md = buildMarkdown(f);
     const path = editingPath ?? `${NEWS_DIR}/${slugify(f.title)}.md`;
-    await putFile(path, md, editingSha, editingPath ? `admin: update news ${path}` : `admin: add news ${path}`);
+    const res = await putFile(path, md, editingSha, editingPath ? `admin: update news ${path}` : `admin: add news ${path}`);
+    // Stay on this post with the fresh SHA so repeated saves don't 409.
+    editingPath = path;
+    editingSha = res?.content?.sha ?? null;
+    $('#np-heading')!.textContent = `Editing: ${path.split('/').pop()}`;
     setMsg('#news-form-msg', '✓ Saved! The site will rebuild in ~1–2 min.', 'ok');
-    newPost();
     await loadNews();
   } catch (e: any) {
     setMsg('#news-form-msg', e.message, 'err');

@@ -2,6 +2,7 @@
 import { SERVER } from '../config';
 const year = new Date().getFullYear();
 const [first, ...rest] = SERVER.name.split(' ');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <footer class="site-footer">
@@ -11,12 +12,12 @@ const [first, ...rest] = SERVER.name.split(' ');
       <span class="brand-name">{first}<span class="brand-accent">{rest.join(' ')}</span></span>
     </div>
     <nav class="footer-links">
-      <a href="/#join">Play</a>
-      <a href="/#features">Features</a>
-      <a href="/#rules">Rules</a>
-      <a href="/#staff">Staff</a>
-      <a href="/news/">News</a>
-      <a href="/#faq">FAQ</a>
+      <a href={`${base}/#join`}>Play</a>
+      <a href={`${base}/#features`}>Features</a>
+      <a href={`${base}/#rules`}>Rules</a>
+      <a href={`${base}/#staff`}>Staff</a>
+      <a href={`${base}/news/`}>News</a>
+      <a href={`${base}/#faq`}>FAQ</a>
     </nav>
     <p class="footer-note">
       © {year} {SERVER.name} · {SERVER.domain} · Not affiliated with Mojang or Microsoft.

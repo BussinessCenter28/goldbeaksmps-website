@@ -28,4 +28,4 @@ Bases are fair game. There is **no grief protection** out in the world, so:
 Hacking, X-ray, duping, and autoclickers will get you removed. Play fair, fight
 hard, and may the best builder win.
 
-Check the full [rules](/#rules) any time.
+Check the full [rules](../../#rules) any time.

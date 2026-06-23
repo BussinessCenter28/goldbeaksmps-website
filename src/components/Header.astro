@@ -2,11 +2,12 @@
 import { SERVER } from '../config';
 const [first, ...rest] = SERVER.name.split(' ');
 const accent = rest.join(' ');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <header class="site-header" id="top">
   <nav class="nav container">
-    <a href="/#top" class="brand">
+    <a href={`${base}/#top`} class="brand">
       <span class="brand-mark">⛏</span>
       <span class="brand-name">{first}<span class="brand-accent">{accent}</span></span>
     </a>
@@ -16,13 +17,13 @@ const accent = rest.join(' ');
     </button>
 
     <ul class="nav-links" id="navLinks">
-      <li><a href="/#join">Play</a></li>
-      <li><a href="/#features">Features</a></li>
-      <li><a href="/#rules">Rules</a></li>
-      <li><a href="/#staff">Staff</a></li>
-      <li><a href="/news/">News</a></li>
-      <li><a href="/#faq">FAQ</a></li>
-      <li><a href="/#join" class="btn btn-gold btn-sm">Join Now</a></li>
+      <li><a href={`${base}/#join`}>Play</a></li>
+      <li><a href={`${base}/#features`}>Features</a></li>
+      <li><a href={`${base}/#rules`}>Rules</a></li>
+      <li><a href={`${base}/#staff`}>Staff</a></li>
+      <li><a href={`${base}/news/`}>News</a></li>
+      <li><a href={`${base}/#faq`}>FAQ</a></li>
+      <li><a href={`${base}/#join`} class="btn btn-gold btn-sm">Join Now</a></li>
     </ul>
   </nav>
 </header>

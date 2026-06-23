@@ -19,7 +19,7 @@ your way up the economy, there's a place for you in our world.
 
 ## Getting started
 
-1. Copy the server address from the [home page](/#join).
+1. Copy the server address from the [home page](../../#join).
 2. Add it in Minecraft (Java or Bedrock).
 3. Jump in, read the rules, and start your story.
 

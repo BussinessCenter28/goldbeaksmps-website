@@ -1,5 +1,6 @@
 ---
 import '../../styles/global.css';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <!doctype html>
@@ -9,7 +10,7 @@ import '../../styles/global.css';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
     <title>Admin — GoldBeak SMPS</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +21,7 @@ import '../../styles/global.css';
   <body class="admin-body">
     <div class="admin-wrap">
       <header class="admin-top">
-        <a href="/" class="brand">
+        <a href={`${base}/`} class="brand">
           <span class="brand-mark">⛏</span>
           <span class="brand-name">GoldBeak<span class="brand-accent">SMPS</span></span>
         </a>
@@ -141,7 +142,7 @@ import '../../styles/global.css';
 
       <footer class="admin-foot">
         Edits commit to GitHub and the site rebuilds automatically (~1–2 min).
-        <a href="/">← Back to site</a>
+        <a href={`${base}/`}>← Back to site</a>
       </footer>
     </div>
 
