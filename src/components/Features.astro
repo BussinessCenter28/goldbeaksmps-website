@@ -1,0 +1,27 @@
+---
+const features = [
+  { icon: '🌍', title: 'True Survival', body: 'Vanilla-feel survival with quality-of-life touches. Earn everything you build.' },
+  { icon: '⚔️', title: 'PvP Combat', body: 'Full PvP out in the world. Spawn is a safe zone — beyond it, watch your back.' },
+  { icon: '🔥', title: 'Raiding Allowed', body: 'Raid rival bases and defend your own. Loot is fair game — fortify or lose it.' },
+  { icon: '💰', title: 'Player Economy', body: 'Build your balance, trade with others, and work your way to the top.' },
+  { icon: '🎮', title: 'Crossplay', body: 'Java and Bedrock players in one world. Play with friends on any device.' },
+  { icon: '🛡️', title: 'Active Staff', body: 'A dedicated team keeps the server fair, fun, and running smoothly.' },
+];
+---
+
+<section class="section section-alt" id="features">
+  <div class="container">
+    <h2 class="section-title">Why GoldBeak?</h2>
+    <p class="section-sub">A raw survival experience — no hand-holding, no pay-to-win.</p>
+
+    <div class="feature-grid">
+      {features.map((f) => (
+        <div class="feature-card">
+          <div class="feature-icon">{f.icon}</div>
+          <h3>{f.title}</h3>
+          <p>{f.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

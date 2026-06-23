@@ -1,0 +1,9 @@
+[
+  { "role": "Founder",    "accent": "gold",   "members": ["GetIced_"] },
+  { "role": "Co-Founder", "accent": "gold",   "members": ["MrCatBat300", "LordCreationX"] },
+  { "role": "Developer",  "accent": "purple", "members": ["5v6p"] },
+  { "role": "Admin",      "accent": "red",    "members": ["Offline_ItsBro", "ujilatron"] },
+  { "role": "Jr. Admin",  "accent": "red",    "members": ["Cezarz"] },
+  { "role": "Mod",        "accent": "blue",   "members": ["AJP123"] },
+  { "role": "Trainee",    "accent": "green",  "members": ["idlemurtx"] }
+]

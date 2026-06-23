@@ -1,0 +1,13 @@
+[
+  { "title": "No hacking",                       "note": "No hacked clients, X-ray, or unfair modifications." },
+  { "title": "No naked killing",                 "note": "Don't kill unarmed/unequipped players." },
+  { "title": "No duping",                        "note": "Item duplication and exploits are banned." },
+  { "title": "No autoclickers",                  "note": "Clicking must be done by hand — no macros." },
+  { "title": "No running into spawn in combat",  "note": "You cannot escape a fight by fleeing to the safe zone." },
+  { "title": "Be respectful",                    "note": "Treat everyone with respect. No toxicity." },
+  { "title": "No swearing",                       "note": "Keep chat clean and friendly." },
+  { "title": "Answer all staff questions",       "note": "Cooperate with staff during checks." },
+  { "title": "No lying to staff",                "note": "Always be honest with the team." },
+  { "title": "No racism",                        "note": "Zero tolerance for racism or hate speech." },
+  { "title": "No asking for OP or ranks",        "note": "Don't beg staff for operator status or ranks." }
+]

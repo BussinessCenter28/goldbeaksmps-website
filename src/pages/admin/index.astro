@@ -1,0 +1,241 @@
+---
+import '../../styles/global.css';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Admin — GoldBeak SMPS</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="admin-body">
+    <div class="admin-wrap">
+      <header class="admin-top">
+        <a href="/" class="brand">
+          <span class="brand-mark">⛏</span>
+          <span class="brand-name">GoldBeak<span class="brand-accent">SMPS</span></span>
+        </a>
+        <span class="admin-badge">Admin</span>
+      </header>
+
+      <!-- ===== Auth ===== -->
+      <section id="auth-panel" class="admin-section">
+        <h1 class="admin-h1">Sign in</h1>
+        <p class="admin-dim">
+          Paste a GitHub <strong>fine-grained personal access token</strong> with
+          <strong>Contents: Read &amp; write</strong> on this repo. It's stored only in
+          this browser and used to commit your edits.
+          <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Create a token →</a>
+        </p>
+
+        <div class="admin-field">
+          <label for="gh-token">GitHub token</label>
+          <input id="gh-token" class="admin-input" type="password" placeholder="github_pat_…" autocomplete="off" />
+        </div>
+        <div class="admin-grid-3">
+          <div class="admin-field">
+            <label for="gh-owner">Owner (username)</label>
+            <input id="gh-owner" class="admin-input" type="text" placeholder="your-github-username" />
+          </div>
+          <div class="admin-field">
+            <label for="gh-repo">Repo</label>
+            <input id="gh-repo" class="admin-input" type="text" />
+          </div>
+          <div class="admin-field">
+            <label for="gh-branch">Branch</label>
+            <input id="gh-branch" class="admin-input" type="text" />
+          </div>
+        </div>
+        <button id="btn-connect" class="btn btn-gold">Connect</button>
+        <p id="auth-msg" class="admin-msg"></p>
+      </section>
+
+      <!-- ===== Editor ===== -->
+      <section id="editor" class="admin-section" style="display:none">
+        <div class="editor-head">
+          <div>
+            <h1 class="admin-h1">Content editor</h1>
+            <p class="admin-dim">Connected to <code id="conn-label"></code></p>
+          </div>
+          <button id="btn-disconnect" class="btn btn-ghost btn-sm">Sign out</button>
+        </div>
+
+        <div class="admin-tabs">
+          <button class="admin-tab active" data-tab="staff">Staff</button>
+          <button class="admin-tab" data-tab="rules">Rules</button>
+          <button class="admin-tab" data-tab="news">News</button>
+        </div>
+
+        <!-- Staff -->
+        <div data-panel="staff">
+          <div id="staff-list" class="admin-list"></div>
+          <div class="admin-actions">
+            <button id="btn-add-staff" class="btn-mini">+ Add role</button>
+            <button id="btn-save-staff" class="btn btn-gold btn-sm">Save staff</button>
+            <span id="staff-msg" class="admin-msg"></span>
+          </div>
+        </div>
+
+        <!-- Rules -->
+        <div data-panel="rules" style="display:none">
+          <div id="rules-list" class="admin-list"></div>
+          <div class="admin-actions">
+            <button id="btn-add-rule" class="btn-mini">+ Add rule</button>
+            <button id="btn-save-rules" class="btn btn-gold btn-sm">Save rules</button>
+            <span id="rules-msg" class="admin-msg"></span>
+          </div>
+        </div>
+
+        <!-- News -->
+        <div data-panel="news" style="display:none">
+          <div class="admin-actions">
+            <button id="btn-new-post" class="btn-mini">+ New post</button>
+            <span id="news-msg" class="admin-msg"></span>
+          </div>
+          <div id="news-list" class="admin-list"></div>
+
+          <div id="news-form" class="admin-card admin-form">
+            <h3 id="np-heading" class="admin-form-title">New post</h3>
+            <div class="admin-field">
+              <label for="np-title">Title</label>
+              <input id="np-title" class="admin-input" type="text" />
+            </div>
+            <div class="admin-grid-3">
+              <div class="admin-field">
+                <label for="np-date">Date</label>
+                <input id="np-date" class="admin-input" type="date" />
+              </div>
+              <div class="admin-field">
+                <label for="np-author">Author</label>
+                <input id="np-author" class="admin-input" type="text" />
+              </div>
+              <div class="admin-field">
+                <label for="np-tag">Tag (optional)</label>
+                <input id="np-tag" class="admin-input" type="text" placeholder="Announcement" />
+              </div>
+            </div>
+            <div class="admin-field">
+              <label for="np-summary">Summary</label>
+              <input id="np-summary" class="admin-input" type="text" />
+            </div>
+            <div class="admin-field">
+              <label for="np-body">Body (Markdown)</label>
+              <textarea id="np-body" class="admin-input admin-textarea" rows="10"></textarea>
+            </div>
+            <div class="admin-actions">
+              <button id="btn-save-post" class="btn btn-gold btn-sm">Save post</button>
+              <span id="news-form-msg" class="admin-msg"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="admin-foot">
+        Edits commit to GitHub and the site rebuilds automatically (~1–2 min).
+        <a href="/">← Back to site</a>
+      </footer>
+    </div>
+
+    <script>
+      import { initAdmin } from '../../scripts/admin';
+      initAdmin();
+    </script>
+
+    <style>
+      .admin-body { background: var(--bg); }
+      .admin-wrap { max-width: 860px; margin-inline: auto; padding: 24px clamp(16px, 4vw, 32px) 60px; }
+      .admin-top {
+        display: flex; align-items: center; gap: 14px;
+        padding: 12px 0 24px; border-bottom: 1px solid var(--border); margin-bottom: 28px;
+      }
+      .admin-badge {
+        font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+        color: var(--gold); background: rgba(245,197,66,.14); padding: 4px 10px; border-radius: 999px;
+      }
+      .admin-section { animation: none; }
+      .admin-h1 { font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 6px; }
+      .admin-dim { color: var(--text-dim); font-size: .95rem; margin-bottom: 18px; }
+      .admin-dim a { color: var(--gold); }
+
+      .admin-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+      .admin-field label { font-size: .8rem; font-weight: 600; color: var(--text-dim); }
+      .admin-input {
+        width: 100%; background: var(--surface); color: var(--text);
+        border: 1px solid var(--border); border-radius: var(--radius-sm);
+        padding: 10px 12px; font-size: .95rem; font-family: var(--font-body);
+      }
+      .admin-input:focus { outline: none; border-color: var(--gold); }
+      .admin-select { cursor: pointer; }
+      .admin-textarea { resize: vertical; font-family: ui-monospace, Consolas, monospace; line-height: 1.5; }
+      .admin-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+      .editor-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+      .editor-head code { color: var(--gold-soft); font-size: .85rem; }
+
+      .admin-tabs { display: flex; gap: 8px; margin: 22px 0; border-bottom: 1px solid var(--border); }
+      .admin-tab {
+        background: none; border: 0; color: var(--text-dim); cursor: pointer;
+        padding: 10px 16px; font-weight: 600; font-size: .95rem;
+        border-bottom: 2px solid transparent; margin-bottom: -1px;
+      }
+      .admin-tab:hover { color: var(--text); }
+      .admin-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+      .admin-list { display: grid; gap: 12px; margin-bottom: 18px; }
+      .admin-card {
+        background: var(--surface); border: 1px solid var(--border);
+        border-radius: var(--radius-sm); padding: 14px;
+      }
+      .admin-card-head { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+      .admin-card-head .admin-input { margin: 0; }
+      .admin-card-head .admin-select { max-width: 130px; }
+
+      .chip-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+      .chip { display: flex; align-items: center; gap: 4px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 2px 4px 2px 8px; }
+      .chip-input { width: 130px; margin: 0; padding: 6px 8px; border: 0; background: transparent; }
+      .chip-input:focus { outline: none; }
+      .chip-x { background: none; border: 0; color: var(--text-dim); cursor: pointer; font-size: .8rem; padding: 4px 6px; }
+      .chip-x:hover { color: var(--red); }
+
+      .btn-mini {
+        background: var(--surface-2); color: var(--text); border: 1px solid var(--border);
+        border-radius: 8px; padding: 7px 12px; font-size: .85rem; font-weight: 600; cursor: pointer;
+      }
+      .btn-mini:hover { border-color: var(--gold); color: var(--gold-soft); }
+      .btn-mini.danger:hover { border-color: var(--red); color: var(--red); }
+
+      .admin-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+      .admin-msg { font-size: .9rem; color: var(--text-dim); }
+      .admin-msg.ok { color: var(--green); }
+      .admin-msg.err { color: var(--red); }
+
+      .admin-row {
+        display: flex; align-items: center; justify-content: space-between; gap: 12px;
+        background: var(--surface); border: 1px solid var(--border);
+        border-radius: var(--radius-sm); padding: 10px 14px;
+      }
+      .admin-row-name { font-family: ui-monospace, Consolas, monospace; font-size: .9rem; }
+      .admin-row span button { margin-left: 6px; }
+
+      .admin-form { margin-top: 18px; }
+      .admin-form-title { font-size: 1.1rem; margin-bottom: 14px; }
+
+      .admin-foot { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: .9rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+      .admin-foot a { color: var(--gold); }
+
+      @media (max-width: 560px) {
+        .admin-grid-3 { grid-template-columns: 1fr; }
+        .admin-card-head { flex-wrap: wrap; }
+      }
+    </style>
+  </body>
+</html>

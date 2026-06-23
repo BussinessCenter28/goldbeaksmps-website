@@ -1,0 +1,87 @@
+---
+import { SERVER } from '../config';
+---
+
+<section class="section" id="join">
+  <div class="container">
+    <h2 class="section-title">Connect &amp; Play</h2>
+    <p class="section-sub">
+      GoldBeak is crossplay — Java and Bedrock players share the same world.
+      Copy the address for your edition and hop in.
+    </p>
+
+    <div class="connect-grid">
+      <!-- Java -->
+      <article class="connect-card">
+        <div class="connect-head">
+          <span class="edition-tag java">Java Edition</span>
+          <span class="edition-hint">PC · Mac · Linux</span>
+        </div>
+        <p class="connect-label">Server Address</p>
+        <div class="copy-row">
+          <code class="address" id="javaAddress">{SERVER.address}</code>
+          <button class="btn btn-copy" data-copy-target="javaAddress" aria-label="Copy Java address">Copy</button>
+        </div>
+        <ol class="connect-steps">
+          <li>Open Minecraft → <strong>Multiplayer</strong> → <strong>Add Server</strong>.</li>
+          <li>Paste the address above into the <em>Server Address</em> box.</li>
+          <li>Click <strong>Done</strong>, then join. See you in-game!</li>
+        </ol>
+      </article>
+
+      <!-- Bedrock -->
+      <article class="connect-card">
+        <div class="connect-head">
+          <span class="edition-tag bedrock">Bedrock Edition</span>
+          <span class="edition-hint">Mobile · Console · Win10/11</span>
+        </div>
+        <p class="connect-label">Address &amp; Port</p>
+        <div class="copy-row">
+          <code class="address" id="bedrockAddress">{SERVER.address}</code>
+          <button class="btn btn-copy" data-copy-target="bedrockAddress" aria-label="Copy Bedrock address">Copy</button>
+        </div>
+        <div class="copy-row">
+          <code class="address" id="bedrockPort">{SERVER.bedrockPort}</code>
+          <button class="btn btn-copy" data-copy-target="bedrockPort" aria-label="Copy Bedrock port">Copy</button>
+        </div>
+        <ol class="connect-steps">
+          <li>Open Minecraft → <strong>Play</strong> → <strong>Servers</strong> → <strong>Add Server</strong>.</li>
+          <li>Enter the address and port above.</li>
+          <li>Save, then tap to join. No add-ons needed!</li>
+        </ol>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-copy-target]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const id = btn.getAttribute('data-copy-target');
+      const target = id ? document.getElementById(id) : null;
+      if (!target) return;
+      const value = (target.textContent || '').trim();
+
+      try {
+        await navigator.clipboard.writeText(value);
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = value;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch {}
+        document.body.removeChild(ta);
+      }
+
+      const original = btn.textContent;
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('copied');
+      }, 1600);
+    });
+  });
+</script>

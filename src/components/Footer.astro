@@ -1,0 +1,25 @@
+---
+import { SERVER } from '../config';
+const year = new Date().getFullYear();
+const [first, ...rest] = SERVER.name.split(' ');
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark">⛏</span>
+      <span class="brand-name">{first}<span class="brand-accent">{rest.join(' ')}</span></span>
+    </div>
+    <nav class="footer-links">
+      <a href="/#join">Play</a>
+      <a href="/#features">Features</a>
+      <a href="/#rules">Rules</a>
+      <a href="/#staff">Staff</a>
+      <a href="/news/">News</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <p class="footer-note">
+      © {year} {SERVER.name} · {SERVER.domain} · Not affiliated with Mojang or Microsoft.
+    </p>
+  </div>
+</footer>

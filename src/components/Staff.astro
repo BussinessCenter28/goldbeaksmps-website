@@ -1,0 +1,33 @@
+---
+import { STAFF, headUrl } from '../data/staff';
+---
+
+<section class="section section-alt" id="staff">
+  <div class="container">
+    <h2 class="section-title">Meet the Team</h2>
+    <p class="section-sub">The crew keeping GoldBeak SMPS running.</p>
+
+    <div class="staff-groups">
+      {STAFF.map((group) => (
+        <div class="staff-group">
+          <h3 class={`staff-role accent-${group.accent}`}>{group.role}</h3>
+          <div class="staff-members">
+            {group.members.map((name) => (
+              <div class="staff-card">
+                <img
+                  class="staff-avatar"
+                  src={headUrl(name, 80)}
+                  alt={`${name}'s Minecraft head`}
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                />
+                <span class="staff-name">{name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

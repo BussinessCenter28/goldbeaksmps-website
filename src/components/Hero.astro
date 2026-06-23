@@ -1,0 +1,63 @@
+---
+import { SERVER } from '../config';
+const [first, ...rest] = SERVER.name.split(' ');
+---
+
+<section class="hero">
+  <div class="container hero-content">
+    <p class="eyebrow">Java &amp; Bedrock · Crossplay Survival</p>
+    <h1 class="hero-title">{first}<span class="gold"> {rest.join(' ')}</span></h1>
+    <p class="hero-tagline">
+      Build, raid, and survive. A crossplay survival world where PvP is real and
+      bases are fair game — fortify yours or lose it. Earn your way up, no shortcuts.
+    </p>
+
+    <div class="status-pill" id="statusPill" aria-live="polite" data-max={SERVER.maxPlayers}>
+      <span class="status-dot" id="statusDot"></span>
+      <span id="statusText">Checking server status…</span>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#join" class="btn btn-gold">How to Join</a>
+      <a href="#features" class="btn btn-ghost">What's Inside</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { SERVER } from '../config';
+
+  async function fetchStatus() {
+    const pill = document.getElementById('statusPill');
+    const text = document.getElementById('statusText');
+    if (!pill || !text) return;
+
+    const base =
+      SERVER.statusEdition === 'bedrock'
+        ? 'https://api.mcsrvstat.us/bedrock/3/'
+        : 'https://api.mcsrvstat.us/3/';
+
+    try {
+      const res = await fetch(base + encodeURIComponent(SERVER.statusAddress), {
+        cache: 'no-store',
+      });
+      const data = await res.json();
+
+      if (data && data.online) {
+        const p = data.players || {};
+        const online = p.online ?? 0;
+        const max = p.max ?? SERVER.maxPlayers;
+        pill.classList.add('online');
+        text.textContent = `Online · ${online}/${max} players`;
+      } else {
+        pill.classList.add('offline');
+        text.textContent = 'Server offline';
+      }
+    } catch {
+      pill.classList.add('offline');
+      text.textContent = 'Status unavailable';
+    }
+  }
+
+  fetchStatus();
+</script>

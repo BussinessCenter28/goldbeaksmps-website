@@ -1,0 +1,24 @@
+---
+import { RULES } from '../data/rules';
+---
+
+<section class="section" id="rules">
+  <div class="container">
+    <h2 class="section-title">Server Rules</h2>
+    <p class="section-sub">
+      Raiding and PvP are allowed — but break these and you're out. Keep it fair.
+    </p>
+
+    <div class="rules-grid">
+      {RULES.map((rule) => (
+        <div class="rule-card">
+          <span class="rule-x">✕</span>
+          <div>
+            <h3 class="rule-title">{rule.title}</h3>
+            <p class="rule-note">{rule.note}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

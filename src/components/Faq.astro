@@ -1,0 +1,43 @@
+---
+const faqs = [
+  {
+    q: 'Is GoldBeak SMPS free to join?',
+    a: 'Yes! It is completely free. Just grab the address above, add the server, and join.',
+  },
+  {
+    q: 'Can Java and Bedrock players play together?',
+    a: 'Absolutely. GoldBeak is a crossplay server, so Java and Bedrock players share the same world. Use the address for your edition above.',
+  },
+  {
+    q: 'Is there PvP?',
+    a: 'Yes — PvP is enabled out in the world. Spawn is a protected safe zone, so no combat there. Note: you cannot run into spawn while in combat to escape a fight — that is against the rules.',
+  },
+  {
+    q: 'Can my base be raided?',
+    a: 'Yes. Raiding is allowed on GoldBeak — there is no grief protection. Build defenses, hide your valuables, and fortify. Outsmarting raiders is part of the fun.',
+  },
+  {
+    q: 'How do I get a rank or OP?',
+    a: 'Please do not ask staff for OP or ranks — it is against the rules. Keep an eye on the News page for any rank announcements.',
+  },
+  {
+    q: "I can't connect — what do I do?",
+    a: 'Make sure your game is updated to the latest version and the address is typed correctly (Bedrock players: include the port). If it still will not connect, the server may be restarting — try again in a few minutes.',
+  },
+];
+---
+
+<section class="section section-alt" id="faq">
+  <div class="container">
+    <h2 class="section-title">FAQ</h2>
+
+    <div class="faq-list">
+      {faqs.map((item) => (
+        <details class="faq-item">
+          <summary>{item.q}</summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
