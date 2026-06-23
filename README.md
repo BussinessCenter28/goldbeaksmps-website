@@ -77,13 +77,19 @@ It appears on the home page and `/news` automatically.
 
 ## Deploy to GitHub Pages
 
-1. Push this repo to GitHub (branch `main`).
-2. Repo → **Settings → Pages → Source: GitHub Actions**.
-3. The included workflow ([.github/workflows/deploy.yml](.github/workflows/deploy.yml))
-   builds the site and deploys it on every push.
-4. **Custom domain:** `goldbeaksmps.asmp.info` is set in [public/CNAME](public/CNAME).
-   In your DNS, add a `CNAME` record for `goldbeaksmps` → `<your-username>.github.io`
-   (or the apex/A-records GitHub provides). Then confirm the domain under Settings → Pages.
+Already deployed at **https://bussinesscenter28.github.io/goldbeaksmps-website/**.
+
+1. Repo → **Settings → Pages → Source: GitHub Actions** (one-time).
+2. The included workflow ([.github/workflows/deploy.yml](.github/workflows/deploy.yml))
+   rebuilds and deploys on every push to `main`.
+
+Because it's a **project page**, `astro.config.mjs` sets `base: '/goldbeaksmps-website'`
+and all internal links use `import.meta.env.BASE_URL`.
+
+> **Custom domain:** `goldbeaksmps.asmp.info` points to the Minehut MC server, so the
+> website uses the github.io URL. To put the site on a branded domain, point a *subdomain*
+> CNAME (e.g. `www`) at `bussinesscenter28.github.io`, set `site` to it and remove `base`
+> in `astro.config.mjs`, and add a `public/CNAME`.
 
 ## Project structure
 

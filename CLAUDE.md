@@ -12,7 +12,11 @@ and get connect instructions for both Java and Bedrock.
   build step and a content collection for news — i.e. more than plain HTML/CSS/JS,
   but still ships as a fast static site.
 - **Hosting:** GitHub Pages (static output) via the workflow in `.github/workflows/`.
-- **Custom domain:** `goldbeaksmps.asmp.info` (see `public/CNAME`).
+- **Live URL:** https://bussinesscenter28.github.io/goldbeaksmps-website/ (a PROJECT page,
+  so `astro.config.mjs` sets `base: '/goldbeaksmps-website'`; all internal links use
+  `import.meta.env.BASE_URL`). No CNAME — see domain note below.
+- **Domain note:** `goldbeaksmps.asmp.info` is a CNAME to the Minehut MC server, so it's
+  the in-game connect address, NOT the website. The website lives on the github.io URL.
 - **Audience:** Minecraft players, many on mobile — keep it responsive and fast.
 
 ## Server facts (the real ones)
@@ -47,7 +51,6 @@ src/
     news/[...slug].astro  Single news post
   styles/global.css    Theme tokens (:root) + all styling
 public/
-  CNAME                Custom domain for GitHub Pages
   favicon.svg
 .github/workflows/deploy.yml   Build + deploy to GitHub Pages
 ```
@@ -95,9 +98,11 @@ npm run preview  # preview the built site
 
 1. Push to GitHub (`main`).
 2. Repo → Settings → Pages → Source: **GitHub Actions**.
-3. The `deploy.yml` workflow builds and publishes `dist/`.
-4. Add the custom domain `goldbeaksmps.asmp.info` (already in `public/CNAME`) and
-   point its DNS at GitHub Pages.
+3. The `deploy.yml` workflow builds and publishes `dist/` on every push to `main`.
+4. Site goes live at https://bussinesscenter28.github.io/goldbeaksmps-website/.
+   To move to a branded domain later: point a subdomain CNAME at
+   `bussinesscenter28.github.io`, set `site` to it and remove `base` in
+   `astro.config.mjs`, and add a `public/CNAME` with that subdomain.
 
 ## When making changes
 
