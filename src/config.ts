@@ -39,7 +39,7 @@ export const SERVER = {
    admin UI (it's saved in your browser either way).
    ==================================================================== */
 export const REPO = {
-  owner: '',                       // e.g. 'GetIced'  (your GitHub username/org)
+  owner: 'BussinessCenter28',       // your GitHub username/org
   name: 'goldbeaksmps-website',
   branch: 'main',
 };
